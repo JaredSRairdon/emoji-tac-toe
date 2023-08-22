@@ -7,8 +7,7 @@ const Gameboard = (() => {
     const updateCell = (index, marker) => {
         if (board[index] === '') {
             board[index] = marker;
-             console.log(`updateCell => board[index]: ${board[index]}`)
-
+            console.log(`updateCell => board: ${board}`)
             return true // valid move
         } 
         return false; // invalid move
@@ -64,11 +63,15 @@ const Game = (() => {
 const UI = (() => {
     const renderGameboard = () => {
         const board = Gameboard.getBoard();
-        const cells = document.querySelectorAll('cell');
+        const cells = document.querySelectorAll('.cell');
 
+        // board[index] contains the value stored in the cell that was clicked
         cells.forEach((cell, index) => {
-            cell.textContent = board[index];
+            // CHANGE THIS FOR SETTING DISPLAYED CONTENT IN THE CELL
+            cell.innerHTML = `<span class="cell-content">${board[index]}</span>`;
         });
+
+        console.log(`renderGameboard => Gameboard re-rendered!`);
     };
 
     const attachCellListeners = () => {
@@ -79,8 +82,6 @@ const UI = (() => {
             if (!Game.gameOver) {
               Game.playTurn(index);
             }
-
-            console.log(index);
           });
         });
       };

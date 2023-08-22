@@ -6,6 +6,7 @@
     --background-color-light: #666666;
     --primary-text-color: #FFFFFF;
     --secondary-text-color: #B3B3B3;
+    font-family: "Roboto";
 }
 
 body {
@@ -13,12 +14,13 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
     background-color: var(--background-color-medium);
 }
 
 .game-stats {
     color: var(--primary-text-color);
-    font-family: "Roboto";
+
     font-size: 2rem;
     margin: 1rem;
 }
@@ -33,8 +35,19 @@ body {
 }
 
 .cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
     background-color: var(--background-color-light);
     border: solid 1px black;
     border-radius: 1rem;
-    padding: 2rem;
+    color: var(--primary-text-color);
+}
+
+.cell-content {
+    height: 2rem;
+    font-size: 2rem;
 }
