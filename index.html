@@ -7,19 +7,39 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="game-stats">
-        <span id="current-player" class="current-player"></span>
-    </div>
-    <div class="gameboard">
-        <div id='cell-0' class="cell"></div>
-        <div id='cell-1' class="cell"></div>
-        <div id='cell-2' class="cell"></div>
-        <div id='cell-3' class="cell"></div>
-        <div id='cell-4' class="cell"></div>
-        <div id='cell-5' class="cell"></div>
-        <div id='cell-6' class="cell"></div>
-        <div id='cell-7' class="cell"></div>
-        <div id='cell-8' class="cell"></div>
+
+
+    <div class="container">
+
+        <div class="game-stats" id="game-stats">
+            <span id="current-player" class="current-player">Player 1</span>
+        </div>
+        <div class="gameboard">
+            <div class="pregame-window show">
+                <h1 class="pregame-title">Emoji-Tac-Toe!</h1>
+                <div class="input-container">
+                    <label for="player-one-name">Enter a name for Player 1</label>
+                    <input type="text" name="player-one-name" id="player-one-name">
+                </div>
+                <div class="emoji-selection">
+                    <h3 class="emoji-selection-title">Select your emoji</h3>
+                    <hr>
+                    <div id="emoji-list" class="emoji-list">
+
+                    </div>
+                </div>
+                <button class="start-game-btn" id="start-game-btn">Start Game</button>
+            </div>
+            <div id='cell-0' class="cell"></div>
+            <div id='cell-1' class="cell"></div>
+            <div id='cell-2' class="cell"></div>
+            <div id='cell-3' class="cell"></div>
+            <div id='cell-4' class="cell"></div>
+            <div id='cell-5' class="cell"></div>
+            <div id='cell-6' class="cell"></div>
+            <div id='cell-7' class="cell"></div>
+            <div id='cell-8' class="cell"></div>
+        </div>
     </div>
 </body>
 
