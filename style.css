@@ -7,6 +7,7 @@
     --primary-text-color: #FFFFFF;
     --secondary-text-color: #B3B3B3;
     font-family: "Roboto";
+    color: var(--primary-text-color);
 }
 
 body {
@@ -18,20 +19,128 @@ body {
     background-color: var(--background-color-medium);
 }
 
+.container {
+    position: relative;
+    width: 80%; /* Set to your desired width */
+    height: 50%; /* Set to your desired height */
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.5s ease;
+}
+
+/* -------- PREGAME WINDOW ----------  */
+.pregame-window {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.8);
+    padding: 1rem 0 1rem 0;
+    border-radius: 1rem;
+    visibility:hidden;
+    gap: 1rem;
+    z-index: 1;
+}
+
+.pregame-window.show {
+    /* From https://css.glass */
+    background: rgba(86, 86, 86, 0.23);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(18.3px);
+    -webkit-backdrop-filter: blur(18.3px);
+    border: 1px solid rgba(86, 86, 86, 1);
+    transition: 0.5s ease;
+    visibility: visible;
+}
+
+.pregame-title {
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pregame-window input {
+    width: 100%;
+    height: 2rem;
+    margin-top: 4px;
+    border-radius: 0.4rem;
+}
+
+.emoji-selection {
+    width: 80%;
+    height: 40%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
+
+#emoji-gallery {
+    width: 300px;
+    height: 200px;
+    overflow: auto;
+    border: 1px solid #ccc;
+}
+  
+.emoji-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    height: 55%;
+}
+
+.emoji {
+font-size: 4rem;
+}
+
+.emoji-selection hr {
+    width: 75%;
+    height:2px;
+    background-color: white;
+}
+
+.start-game-btn {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+/* -------- MAIN CONTENT ----------  */
 .game-stats {
     color: var(--primary-text-color);
-
-    font-size: 2rem;
+    text-align: center;
+    font-size: 2.5rem;
     margin: 1rem;
+    visibility: hidden;
+}
+
+.game-stats.show {
+    transition: 0.5s ease;
+    visibility: visible;
 }
 
 .gameboard {
     display:grid;
     background-color: var(--background-color-medium);
-    grid-template-columns: repeat(3, 1fr);
-    width: 450px;
-    height: 450px;
-    gap: 10px;
+    height: 100%;
+    grid-template-columns: repeat(3, 1fr); /* Set your desired fixed width */
+    grid-template-rows: repeat(3, 1fr); /* Set your desired fixed height */
+    grid-gap: 14px; /* Adjust the gap between cells */
+    margin: 1rem;
 }
 
 .cell {
@@ -48,6 +157,26 @@ body {
 }
 
 .cell-content {
-    height: 2rem;
-    font-size: 2rem;
+    height: 4rem;
+    font-size: 4rem;
+}
+
+/* ============ MEDIA QUERIES (MEDIUM DEVICES/TABLET) =========== */
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 70%;
+    }
+}
+  
+  /* ============ MEDIA QUERIES (SMALL DEVICES/PHONE) =========== */
+@media screen and (max-width: 600px) {
+    .container {
+        width: 95%;
+    }
+}
+
+@media screen and (max-height: 700px) {
+    .container {
+        height: 60%;
+    }
 }
