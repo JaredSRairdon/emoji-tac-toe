@@ -79,7 +79,7 @@ body {
 
 .emoji-selection {
     width: 80%;
-    height: 40%;
+    height: 50%;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -87,32 +87,31 @@ body {
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     text-align: center;
-}
-
-#emoji-gallery {
-    width: 300px;
-    height: 200px;
-    overflow: auto;
-    border: 1px solid #ccc;
+    overflow: hidden;
 }
   
 .emoji-list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
     padding: 10px;
     overflow-y: auto;
-    height: 55%;
 }
 
 .emoji {
-font-size: 4rem;
+    font-size: 4em;
+    border-radius: 1rem;
 }
 
 .emoji-selection hr {
     width: 75%;
     height:2px;
     background-color: white;
+}
+
+.selected-emoji {
+    background-color: var(--background-color-light);
 }
 
 .start-game-btn {
@@ -172,6 +171,10 @@ font-size: 4rem;
 @media screen and (max-width: 600px) {
     .container {
         width: 95%;
+    }
+
+    .emoji {
+        font-size: 2rem;
     }
 }
 
