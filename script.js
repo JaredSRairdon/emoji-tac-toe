@@ -70,6 +70,12 @@ const UI = (() => {
         });
       };
 
+    let selectedEmoji = null;
+
+    const getSelectedEmoji = () => {
+        return selectedEmoji.innerText;
+    }
+
     const renderPregameMenu = () => {
         const emojiList = document.getElementById('emoji-list');
         const emojis = ['😀', '🥰', '🚀', '🎉', '❤️', '🌟', '😊', '🐱', '🍕', '🌈'];
@@ -80,11 +86,23 @@ const UI = (() => {
             emojiSpan.classList.add('emoji');
             emojiSpan.innerText = emoji;
             emojiList.appendChild(emojiSpan);
-        })
+        });
 
+        // Adds click event listeners to highlight the emoji when clicked
+        const emojiElements = document.querySelectorAll('.emoji');
+
+        emojiElements.forEach(emoji => {
+            emoji.addEventListener('click', () => {
+                if (selectedEmoji) {
+                    selectedEmoji.classList.remove('selected-emoji');
+                }
+                emoji.classList.add('selected-emoji');
+                selectedEmoji = emoji;
+            });
+        });
     }
 
-    return { renderGameboard, attachCellListeners, renderPregameMenu };
+    return { renderGameboard, attachCellListeners, renderPregameMenu, getSelectedEmoji };
 })();
 
 // Game Module
@@ -92,11 +110,13 @@ const Game = (() => {
     let currentPlayer;
     let currentPlayerElement = document.getElementById('current-player');
     let gameStatsElement = document.getElementById('game-stats');
+
+
     let gameOver = false;
 
     // Declaring players and setting default values
-    const player1 = Player('Player 1', 'X');
-    const player2 = Player('Player 2', 'O');
+    let player1 = Player('Player 1', 'X');
+    let player2 = Player('Player 2', 'O');
 
     // Arrow function to toggle the currentPlayer, then adjusts the text in the currentPlayerElement
     const togglePlayer = () => {
@@ -129,7 +149,9 @@ const Game = (() => {
     * and attaching cell listeners.
     */
     const startGame = () => {
+        console.log(player1);
         currentPlayer = player1;
+        // currentPlayer.name = UI.getSelectedEmoji();
         currentPlayerElement.innerText = currentPlayer.name;
         gameStatsElement.style.visibility = 'visible'; // reveals the game-stats div
         gameOver = false;
@@ -137,14 +159,20 @@ const Game = (() => {
         UI.attachCellListeners();
     };
 
+    let playerNameInput = document.getElementById('player-name');
     let startGameButton = document.getElementById('start-game-btn');
+
     startGameButton.addEventListener('click', () => {
+        player1.name = playerNameInput.value.trim();
+        player1.markerIcon = UI.getSelectedEmoji();
+
         startGame();
     });
+    
 
     UI.renderPregameMenu();
 
-    return {startGame, playTurn};
+    return {playTurn, startGame};
 })();
 
 
