@@ -74,7 +74,11 @@ const UI = (() => {
 
     const getSelectedEmoji = () => {
         return selectedEmoji.innerText;
-    }
+    };
+
+    const deselectEmoji = () => {
+        selectedEmoji.classList.remove('selected-emoji')
+    };
 
     const renderPregameMenu = () => {
         const emojiList = document.getElementById('emoji-list');
@@ -102,7 +106,7 @@ const UI = (() => {
         });
     }
 
-    return { renderGameboard, attachCellListeners, renderPregameMenu, getSelectedEmoji };
+    return { renderGameboard, attachCellListeners, renderPregameMenu, getSelectedEmoji, deselectEmoji };
 })();
 
 // Game Module
@@ -110,8 +114,6 @@ const Game = (() => {
     let currentPlayer;
     let currentPlayerElement = document.getElementById('current-player');
     let gameStatsElement = document.getElementById('game-stats');
-
-
     let gameOver = false;
 
     // Declaring players and setting default values
@@ -159,22 +161,46 @@ const Game = (() => {
         UI.attachCellListeners();
     };
 
+    let pregameWindow = document.getElementById('pregame-window');
+    let playerNameInstruction = document.getElementById('player-name-instruction');
     let playerNameInput = document.getElementById('player-name');
+    let nextPlayerButton = document.getElementById('next-player-btn');
     let startGameButton = document.getElementById('start-game-btn');
 
-    startGameButton.addEventListener('click', () => {
-        player1.name = playerNameInput.value.trim();
-        player1.markerIcon = UI.getSelectedEmoji();
+    // Next player button click eventListener
+    nextPlayerButton.addEventListener('click', () => {
+        if (playerNameInput.value && UI.getSelectedEmoji()) {
+            // Storing the name and markerIcon inputs to the Player 1 object
+            player1.name = playerNameInput.value.trim();
+            player1.markerIcon = UI.getSelectedEmoji();
 
-        startGame();
+            // Clearing the playerNameInput box and the selected emoji
+            playerNameInput.value = "";
+            UI.deselectEmoji();
+
+            // Changing playerNameInstruction to reflect Player 2 selection
+            playerNameInstruction.innerText = "Enter a name for Player 2"
+
+            // Hiding nextPlayerButton and reveals startGameButton
+            nextPlayerButton.style.display = "none";
+            startGameButton.style.display = "inline-block";
+        }
+    });
+
+    // Start game button click eventListener
+    startGameButton.addEventListener('click', () => {
+        if (playerNameInput.value && UI.getSelectedEmoji()) {
+            // Storing the name and markerIcon inputs to the Player 2 object
+            player2.name = playerNameInput.value.trim();
+            player2.markerIcon = UI.getSelectedEmoji();
+
+            pregameWindow.classList.remove('show');
+            startGame();
+        } else { /* TODO: Create text saying that a selection/input is required */}
+
     });
     
-
     UI.renderPregameMenu();
 
     return {playTurn, startGame};
 })();
-
-
-
-// Game.startGame();

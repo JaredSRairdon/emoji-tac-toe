@@ -21,9 +21,10 @@ body {
 
 .container {
     position: relative;
-    width: 80%; /* Set to your desired width */
-    height: 50%; /* Set to your desired height */
-    max-width: 800px;
+    width: 60%; /* Set to your desired width */
+    height: 60%; /* Set to your desired height */
+    max-width: 700px;
+    max-height: 1000px;
     display: flex;
     flex-direction: column;
     transition: 0.5s ease;
@@ -87,9 +88,20 @@ body {
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     text-align: center;
-    overflow: hidden;
+    /* Hiding scrollbar on IE, Edge, and Firefox */
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox  */
 }
-  
+/* Hiding scrollbar for Chrome, Safari, and Opera */
+.emoji-selection::-webkit-scrollbar {
+    display: none;
+}
+
+.emoji-selection-title {
+    font-size: 1.2rem;
+}
+
 .emoji-list {
     display: flex;
     flex-wrap: wrap;
@@ -116,6 +128,16 @@ body {
 
 .start-game-btn {
     padding: 0.5rem 1rem 0.5rem 1rem;
+    display: none;
+}
+
+.next-player-btn {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    visibility: hidden;
+}
+
+.next-player-btn.show {
+    visibility: visible;
 }
 
 /* -------- MAIN CONTENT ----------  */
@@ -136,9 +158,9 @@ body {
     display:grid;
     background-color: var(--background-color-medium);
     height: 100%;
-    grid-template-columns: repeat(3, 1fr); /* Set your desired fixed width */
-    grid-template-rows: repeat(3, 1fr); /* Set your desired fixed height */
-    grid-gap: 14px; /* Adjust the gap between cells */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr); 
+    gap: 0.9rem; 
     margin: 1rem;
 }
 
@@ -176,10 +198,14 @@ body {
     .emoji {
         font-size: 2rem;
     }
+
+    .gameboard {
+
+    }
 }
 
-@media screen and (max-height: 700px) {
+@media screen and (max-height: 800px) {
     .container {
-        height: 60%;
+        height: 80%;
     }
 }

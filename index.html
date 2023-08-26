@@ -18,17 +18,18 @@
             <div id="pregame-window" class="pregame-window show">
                 <h1 class="pregame-title">Emoji-Tac-Toe!</h1>
                 <div class="input-container">
-                    <label for="player-name">Enter a name for Player 1</label>
+                    <label id="player-name-instruction" for="player-name">Enter a name for Player 1</label>
                     <input type="text" name="player-name" id="player-name">
                 </div>
                 <div class="emoji-selection">
-                    <h3 class="emoji-selection-title">Select your emoji</h3>
+                    <h1 class="emoji-selection-title">Select your emoji</h1>
                     <hr>
                     <div id="emoji-list" class="emoji-list">
 
                     </div>
                 </div>
-                <button class="start-game-btn" id="start-game-btn">Start Game</button>
+                <button class="next-player-btn show" id="next-player-btn">Next Player</button>
+                <button class="start-game-btn show" id="start-game-btn">Start Game</button>
             </div>
             <div id='cell-0' class="cell"></div>
             <div id='cell-1' class="cell"></div>
