@@ -140,6 +140,44 @@ body {
     visibility: visible;
 }
 
+/* -------- POST-GAME SCREEN ------- */
+.post-game-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 50%;
+    height: 20%;
+
+    visibility: hidden;
+}
+
+.post-game-screen.show {
+    /* From https://css.glass */
+    background: rgba(86, 86, 86, 0.23);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(18.3px);
+    -webkit-backdrop-filter: blur(18.3px);
+    border: 3px solid rgb(78, 78, 78);
+    transition: 0.5s ease;
+    visibility: visible;
+}
+
+.post-game-screen h1 {
+
+}
+
+.post-game-screen button {
+    width: 40%;
+}
+
 /* -------- MAIN CONTENT ----------  */
 .game-stats {
     color: var(--primary-text-color);
@@ -197,10 +235,6 @@ body {
 
     .emoji {
         font-size: 2rem;
-    }
-
-    .gameboard {
-
     }
 }
 

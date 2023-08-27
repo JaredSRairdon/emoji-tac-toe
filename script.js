@@ -126,6 +126,26 @@ const Game = (() => {
         currentPlayerElement.innerText = currentPlayer.name;
     };
 
+    const isVictory = (playerMarkerIcon, board) => {
+        const winningCombinations = [
+            // Rows
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            // Columns
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            // Diagonals
+            [0, 4, 8], [2, 4, 6]
+        ];
+
+        for (const combination of winningCombinations) {
+            const [a, b, c] = combination;
+    
+            if (board[a] === playerMarkerIcon && board[b] === playerMarkerIcon && board[c] === playerMarkerIcon) {
+                return true; // Victory!
+            }
+        }
+    };
+
+
     /*
         Arrow function to play a turn of the game.
         It calls the updateCell method from the Gameboard module to check if it is a valid move.
@@ -134,13 +154,21 @@ const Game = (() => {
         @param index - The index parameter represents the position of the cell in the board array
         that the player clicked on
     */
+    let postGameScreen = document.getElementById("post-game-screen");
+    let postGameHeader = document.getElementById("post-game-header");
+
     const playTurn = (index) => {
         if (!gameOver) {
             const validMove = Gameboard.updateCell(index, currentPlayer.markerIcon); // Gameboard.updateCell will update the cell content, then return boolean whether the move was valid or not.
             console.log(`playTurn => validMove: ${validMove}`)
             if (validMove) { // If the move is valid
-                // TODO: check for win or tie conditions
                 UI.renderGameboard(); // Re-renders the gameboard to display the the new moves
+                
+                if(isVictory(currentPlayer.markerIcon, Gameboard.getBoard())) {
+                    // TODO: Add victory screen
+                    postGameHeader.innerText = `${currentPlayer.name + " : " + currentPlayer.markerIcon } wins!`
+                    postGameScreen.classList.add('show');
+                }
                 togglePlayer(); // Toggles the current player
             }
         }
@@ -202,5 +230,5 @@ const Game = (() => {
     
     UI.renderPregameMenu();
 
-    return {playTurn, startGame};
+    return {playTurn, startGame, isVictory};
 })();
