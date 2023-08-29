@@ -6,6 +6,11 @@ const Gameboard = (() => {
 
     const getBoard = () => board; // returns board array when called
 
+    const resetBoard = () => {
+        board = Array(9).fill('');
+        console.log(board);
+    }
+
     /*
      * The function `updateCell` updates a cell in a board array with a given marker if the cell is empty,
      * and returns true if the move is valid, otherwise it returns false.
@@ -26,7 +31,7 @@ const Gameboard = (() => {
         return false; // invalid move
     };
 
-    return { getBoard, updateCell };
+    return { getBoard, updateCell, resetBoard };
 
 })();
 
@@ -44,7 +49,7 @@ const UI = (() => {
     const renderGameboard = () => {
         const board = Gameboard.getBoard();
         const cells = document.querySelectorAll('.cell');
-
+        console.log(board);
         // board[index] contains the value stored in the cell that was clicked
         cells.forEach((cell, index) => {
             // CHANGE THIS FOR SETTING DISPLAYED CONTENT IN THE CELL
@@ -171,6 +176,7 @@ const Game = (() => {
                         emoji.innerText = currentPlayer.markerIcon;
                     }
 
+                    gameOver = true;
                     postGameScreen.classList.add('show');
                 }
                 togglePlayer(); // Toggles the current player
@@ -187,7 +193,7 @@ const Game = (() => {
         currentPlayer = player1;
         // currentPlayer.name = UI.getSelectedEmoji();
         currentPlayerElement.innerText = currentPlayer.name;
-        gameStatsElement.style.visibility = 'visible'; // reveals the game-stats div
+        gameStatsElement.classList.add('show'); // reveals the game-stats div
         gameOver = false;
         UI.renderGameboard();
         UI.attachCellListeners();
@@ -230,6 +236,17 @@ const Game = (() => {
             startGame();
         } else { /* TODO: Create text saying that a selection/input is required */}
 
+    });
+
+    let newGameButton = document.getElementById("new-game-btn");
+    
+    newGameButton.addEventListener("click", () => {
+        Gameboard.resetBoard(Gameboard.getBoard());
+        postGameScreen.classList.remove('show');
+        currentPlayer = player1;
+        currentPlayerElement.innerText = currentPlayer.name;
+        gameOver = false;
+        UI.renderGameboard();
     });
     
     UI.renderPregameMenu();
