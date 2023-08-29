@@ -156,6 +156,7 @@ const Game = (() => {
     */
     let postGameScreen = document.getElementById("post-game-screen");
     let postGameHeader = document.getElementById("post-game-header");
+    let winnerEmojis = document.querySelectorAll(".winner-emoji");
 
     const playTurn = (index) => {
         if (!gameOver) {
@@ -165,8 +166,11 @@ const Game = (() => {
                 UI.renderGameboard(); // Re-renders the gameboard to display the the new moves
                 
                 if(isVictory(currentPlayer.markerIcon, Gameboard.getBoard())) {
-                    // TODO: Add victory screen
-                    postGameHeader.innerText = `${currentPlayer.name + " : " + currentPlayer.markerIcon } wins!`
+                    postGameHeader.innerText = `${currentPlayer.name}\nwins!`
+                    for (emoji of winnerEmojis) {
+                        emoji.innerText = currentPlayer.markerIcon;
+                    }
+
                     postGameScreen.classList.add('show');
                 }
                 togglePlayer(); // Toggles the current player
