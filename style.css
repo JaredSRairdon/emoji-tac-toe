@@ -6,7 +6,7 @@
     --background-color-light: #666666;
     --primary-text-color: #FFFFFF;
     --secondary-text-color: #B3B3B3;
-    font-family: "Roboto";
+    font-family: "Montserrat";
     color: var(--primary-text-color);
 }
 
@@ -21,13 +21,8 @@ body {
 
 .container {
     position: relative;
-    /* width: 60%;  */
-    /* height: 60%; */
-    /* max-width: 700px;
-    max-height: 1000px; */
     display: flex;
     flex-direction: column;
-    transition: 0.5s ease;
 }
 
 /* -------- PREGAME WINDOW ----------  */
@@ -35,14 +30,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: 0.5s ease;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
     background-color: rgba(255,255,255,0.8);
-    padding: 1rem 0 1rem 0;
+    padding: 0.5rem 0 0.5rem 0;
     border-radius: 1rem;
     visibility:hidden;
     gap: 1rem;
@@ -57,12 +52,31 @@ body {
     backdrop-filter: blur(18.3px);
     -webkit-backdrop-filter: blur(18.3px);
     border: 1px solid rgba(86, 86, 86, 1);
-    transition: 0.5s ease;
+    /* transition: 0.5s ease; */
     visibility: visible;
 }
 
 .pregame-title {
     text-align: center;
+    margin: 1rem 0 0 0;
+    color: #fff;
+    text-shadow:
+      0 1px 0px #378ab4,
+      1px 0 0px #5dabcd,
+      1px 2px 1px #378ab4,
+      2px 1px 1px #5dabcd,
+      2px 3px 2px #378ab4,
+      3px 2px 2px #5dabcd,
+      3px 4px 2px #378ab4,
+      4px 3px 3px #5dabcd,
+      4px 5px 3px #378ab4,
+      5px 4px 2px #5dabcd,
+      5px 6px 2px #378ab4,
+      6px 5px 2px #5dabcd,
+      6px 7px 1px #378ab4,
+      7px 6px 1px #5dabcd,
+      7px 8px 0px #378ab4,
+      8px 7px 0px #5dabcd;
 }
 
 .input-container {
@@ -76,11 +90,14 @@ body {
     height: 2rem;
     margin-top: 4px;
     border-radius: 0.4rem;
+    font-family: "Montserrat";
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
 .emoji-selection {
     width: 80%;
-    height: 50%;
+    height: 15rem;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -112,7 +129,7 @@ body {
 }
 
 .emoji {
-    font-size: 4em;
+    font-size: 3rem;
     border-radius: 1rem;
 }
 
@@ -155,7 +172,6 @@ body {
     gap:1rem;
     width: 50%;
     height: auto;
-
     visibility: hidden;
 }
 
@@ -167,11 +183,16 @@ body {
     backdrop-filter: blur(18.3px);
     -webkit-backdrop-filter: blur(18.3px);
     border: 3px solid rgb(78, 78, 78);
-    transition: 0.5s ease;
+    /* transition: 0.5s ease; */
     visibility: visible;
 }
 
-.post-game-screen h1 {
+.post-game-header-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.post-game-header-container h1 {
     margin: 0;
 }
 
@@ -181,14 +202,13 @@ body {
     border-radius: 0px;
     padding: 18px 36px;
     display: inline-block;
-    font-family: "Lucida Console", Monaco, monospace;
     font-size: 14px;
     letter-spacing: 1px;
     cursor: pointer;
     box-shadow: inset 0 0 0 0 rgb(42, 42, 42);
-    -webkit-transition: ease-out 0.4s;
-    -moz-transition: ease-out 0.4s;
-    transition: ease-out 0.4s;
+    -webkit-transition: box-shadow ease-out 0.4s;
+    -moz-transition: box-shadow ease-out 0.4s;
+    transition: box-shadow ease-out 0.4s;
 }
   
 .slide-left:hover {
@@ -242,16 +262,6 @@ body {
     gap: 12px;
 }
 
-/* .gameboard {
-    display:grid;
-    background-color: var(--background-color-medium);
-    height: 100%;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr); 
-    gap: 0.9rem; 
-    margin: 1rem;
-} */
-
 .cell {
     display: flex;
     justify-content: center;
@@ -284,13 +294,13 @@ body {
         grid-template-columns: repeat(3, minmax(75px, 100px));
     }
 
-    /* .container {
-        width: 95%;
-    }
+    /* .pregame-window {
+        padding: 5rem 0 5rem 0;
+    } */
 
     .emoji {
         font-size: 2rem;
-    } */
+    } 
 }
 
 @media screen and (max-height: 800px) {
